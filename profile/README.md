@@ -41,12 +41,11 @@ data:
 {{ end }}
 ```
 
-> **Status: in development, nothing released yet.** The first release targets
-> HTML output and `slides expand` (a deck with its templates and kinds
-> resolved, as plain Marp Markdown). **Planned**, not built: PNG/JPEG through
-> go-webengine, PDF through go-pdfkit, PPTX through go-ooxml, math through
-> go-tex, code highlighting through go-rouge — no headless Chrome, unlike
-> marp-cli.
+> **Status: v0.6.0 is released.** HTML, `slides expand`, PNG/JPEG, a vector
+> PDF, editable PPTX and ODP, math, code highlighting, emoji, HCL, watch and
+> serve — no headless Chrome, unlike marp-cli. Install with
+> `go install github.com/go-slides/slides/cmd/slides@latest`; see the
+> [documentation](https://go-slides.github.io/docs/).
 
 ## Repositories
 
@@ -55,6 +54,7 @@ data:
 | [**slides**](https://github.com/go-slides/slides) | the `slides` command and its library: the Marp-compatible parser and renderer, template interpolation and slide kinds |
 | [**docs**](https://github.com/go-slides/docs) | the documentation site (Hugo + Hextra), served at [/docs/](https://go-slides.github.io/docs/) |
 | [**go-slides.github.io**](https://github.com/go-slides/go-slides.github.io) | the landing page (Hugo) |
+| [**vscode**](https://github.com/go-slides/vscode) | the VS Code extension: preview, problems, completion and export (installed from the `.vsix` of its GitHub release; not on the Marketplace yet) |
 | [**brand**](https://github.com/go-slides/brand) | logo, icons and social images |
 
 go-slides belongs to the document family of the go-* ecosystem, with
