@@ -56,6 +56,7 @@ data:
 | [**go-slides.github.io**](https://github.com/go-slides/go-slides.github.io) | the landing page (Hugo) |
 | [**vscode**](https://github.com/go-slides/vscode) | the VS Code extension: preview, problems, completion and export (installed from the `.vsix` of its GitHub release; not on the Marketplace yet) |
 | [**brand**](https://github.com/go-slides/brand) | logo, icons and social images |
+| [**gitd**](https://github.com/go-slides/gitd) | slides-gitd, the self-hosted git backend for the playground: the forge's credentials stay on the server, each user is isolated, behind oauth2-proxy (see [self-hosting](https://go-slides.github.io/docs/latest/self-hosting/)) |
 
 go-slides belongs to the document family of the go-* ecosystem, with
 [go-richdoc](https://github.com/go-richdoc), [go-ooxml](https://github.com/go-ooxml),
