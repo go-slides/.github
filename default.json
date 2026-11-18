@@ -35,6 +35,15 @@
       ],
       "automerge": false,
       "groupName": null
+    },
+    {
+      "description": [
+        "@types/vscode follows the extension's engines.vscode (go-slides/vscode package.json), never the reverse. vsce refuses to package an extension whose @types/vscode is newer than its engines.vscode, which is how go-slides/vscode#12 went red with 1.146.0 against ^1.101.0. Raising engines.vscode instead would drop users of older VS Code builds and of editors based on VS Code, which tend to run an older version. Raise engines.vscode on purpose, then raise this bound with it."
+      ],
+      "matchPackageNames": [
+        "@types/vscode"
+      ],
+      "allowedVersions": "~1.101.0"
     }
   ]
 }
