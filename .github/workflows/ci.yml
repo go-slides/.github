@@ -41,15 +41,35 @@ jobs:
       # release's stricter --strict turned this check red (config.js
       # `dependencyDashboard: true` had to become `{ enabled: true }`) while
       # the runner, on 44.251.0, only warned. See go-fleettools/fleettools#305.
-      # The same version is `renovate-version` in renovate.yml: raise both
-      # together.
-      RENOVATE_VERSION: '44.251.0'
+      # The same version is `renovate-version` in renovate.yml. Renovate raises
+      # both in one pull request (the customManagers rule in default.json reads
+      # the comment below, with the same depName its github-actions manager
+      # gives renovate-version), and step 0 fails if they ever differ: the
+      # first pin, a comment saying "raise both together", drifted within
+      # hours (#10 raised renovate-version alone).
+      # renovate: datasource=docker depName=ghcr.io/renovatebot/renovate
+      RENOVATE_VERSION: '44.252.6'
     steps:
       - uses: actions/checkout@v7
 
       - uses: actions/setup-node@v7
         with:
           node-version: '26'
+
+      # 0. PROVES: the validator below and the runner in renovate.yml are the
+      #    same Renovate. A judge on another version than its subject is how
+      #    this check went red on a config the runner accepted (#305).
+      #    DOES NOT PROVE: that the version is a good one.
+      - name: Validator and runner are the same Renovate
+        run: |
+          set -euo pipefail
+          runner="$(sed -nE 's/^[[:space:]]*renovate-version:[[:space:]]*([^[:space:]#]+).*/\1/p' .github/workflows/renovate.yml)"
+          [ -n "$runner" ] || { echo "renovate.yml has no renovate-version: the runner floats"; exit 1; }
+          if [ "$runner" != "$RENOVATE_VERSION" ]; then
+            echo "runner renovate-version $runner != validator RENOVATE_VERSION $RENOVATE_VERSION"
+            exit 1
+          fi
+          echo "both on $runner"
 
       # 1. PROVES: every workflow file is a parseable GitHub Actions workflow
       #    with well-formed expressions and no unknown keys.
