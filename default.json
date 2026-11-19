@@ -4,6 +4,20 @@
     "config:recommended",
     ":semanticCommits"
   ],
+  "customManagers": [
+    {
+      "description": [
+        "A version written as `# renovate: datasource=X depName=Y` on the line above a `NAME: 'version'` in a workflow. Used by .github's ci.yml for RENOVATE_VERSION, with the depName Renovate's github-actions manager gives renovatebot/github-action's renovate-version input, so the validator and the runner are raised in the same pull request."
+      ],
+      "customType": "regex",
+      "managerFilePatterns": [
+        "/^\\.github/workflows/[^/]+\\.ya?ml$/"
+      ],
+      "matchStrings": [
+        "# renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)\\s+[A-Z_]+: '(?<currentValue>[^']+)'"
+      ]
+    }
+  ],
   "postUpdateOptions": [
     "gomodTidy",
     "gomodUpdateImportPaths"
